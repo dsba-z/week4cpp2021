@@ -90,6 +90,75 @@
 #include <random>
 #include <algorithm>
 
+typedef std::vector<std::string> VecString;
+
+bool extractDataLine(std::istream& in, std::string& surname, bool& survived)
+{
+    std::string line;
+    if (!std::getline(in, line))
+    {
+        // reading failed
+        return false;
+    }
+    std::string buffer;
+    std::stringstream sstr(line);
+
+    // read id
+    std::getline(sstr, buffer, ',');
+    
+    // read survived
+    std::getline(sstr, buffer, ',');
+    
+    survived = std::stoi(buffer);
+    
+    // read PClass
+    std::getline(sstr, buffer, ',');
+    
+    // read Surname
+    std::getline(sstr, buffer, ';');
+    
+    surname = buffer;
+    
+    // successfully read
+    return true;
+}
+
+VecString getSurvivorSurnames(std::istream& in)
+{
+    // read and throw away header
+    // https://en.cppreference.com/w/cpp/io/basic_istream/ignore
+    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    VecString vecString;
+    std::string surname;
+    bool survived;
+    while(extractDataLine(in, surname, survived))
+    {
+        if (survived)
+        {
+            vecString.push_back(surname);
+        }
+    }
+    return vecString;
+}
+
+void printVec(const VecString& vecString)
+{
+    for (size_t i = 0; i < vecString.size(); ++i)
+    {
+        std::cout << i+1 << ") " << vecString[i] << "\n";
+    }
+}
+
+void printVecIter(const VecString::const_iterator& vStart, const VecString::const_iterator& vEnd)
+{
+    size_t counter = 1;
+    for (VecString::const_iterator it = vStart; it != vEnd; ++it)
+    {
+        std::cout << counter << ") " << *it << "\n";
+        
+        ++counter;
+    }
+}
 
 
 int main ()
@@ -99,4 +168,8 @@ int main ()
     inputFile.open(INP_FILE_NAME);
     VecString surnames = getSurvivorSurnames(inputFile);
     inputFile.close();
+    
+    std::sort(surnames.begin(), surnames.end());
+    std::reverse(surnames.begin(), surnames.end());
+    printVecIter(surnames.cbegin(), surnames.cend());
 }
