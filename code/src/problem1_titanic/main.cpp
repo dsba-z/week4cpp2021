@@ -94,9 +94,11 @@
 
 int main ()
 {
-    const std::string INP_FILE_NAME = "../../data/problem2_titanic/titanic.csv";
+    const std::string INP_FILE_NAME = "../../data/problem1_titanic/titanic.csv";
     std::ifstream inputFile;
     inputFile.open(INP_FILE_NAME);
-    VecString surnames = getSurvivorSurnames(inputFile);
+//    VecString surnames = getSurvivorSurnames(inputFile);
     inputFile.close();
+    
+    // other functions here
 }
