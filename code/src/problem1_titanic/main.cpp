@@ -122,6 +122,14 @@ bool extractDataFromLine(std::istream& in, bool& survived, std::string& surname)
     return true;
 }
 
+void printVec(const VecString& v)
+{
+    for (size_t i = 0; i < v.size(); ++i)
+    {
+        std::cout << i+1 << ") " << v[i] << std::endl;
+    }
+}
+
 VecString getSurvivorSurnames(std::istream& in)
 {
     // ignore header
@@ -147,5 +155,10 @@ int main ()
     inputFile.open(INP_FILE_NAME);
     VecString surnames = getSurvivorSurnames(inputFile);
     inputFile.close();
+    
+    std::sort(surnames.begin(), surnames.end());
+    std::reverse(surnames.begin(), surnames.end());
+    
+    printVec(surnames);
     return 0;
 }
