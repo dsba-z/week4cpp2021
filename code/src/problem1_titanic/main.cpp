@@ -92,7 +92,7 @@
 
 
 
-int main ()
+int main()
 {
     const std::string INP_FILE_NAME = "../../data/problem1_titanic/titanic.csv";
     std::ifstream inputFile;
