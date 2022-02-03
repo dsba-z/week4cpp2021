@@ -90,14 +90,67 @@
 #include <random>
 #include <algorithm>
 
+typedef std::vector<std::string> VecString;
+typedef std::vector<double> VecDouble;
 
+bool extractDataFromLine(std::istream& in, bool& survived, std::string& surname)
+{
+    std::string line;
+    if (not std::getline(in, line))
+    {
+        // reading failure
+        return false;
+    }
+    // reading success
+    
+    std::stringstream sstr(line);
+    
+    std::string buffer;
+    // PassengerID
+    std::getline(sstr, buffer, ',');
+    
+    // Survived
+    std::getline(sstr, buffer, ',');
+    survived = std::stoi(buffer);
+    
+    
+    // Pclass
+    std::getline(sstr, buffer, ',');
+//    sstr.ignore(10000, ',');
+    
+    // Surname
+    std::getline(sstr, buffer, ';');
+    surname = buffer;
+    
+    return true;
+    
+}
+
+
+VecString getSurvivorSurnames(std::istream& in)
+{
+    in.ignore(10000, '\n');
+//    std::string header;
+//    std::getline(in, header);
+    bool survived;
+    std::string surname;
+    VecString surnames;
+    while (extractDataFromLine(in, survived, surname))
+    {
+        if (survived)
+        {
+            surnames.push_back(surname);
+        }
+    }
+    return surnames;
+}
 
 int main()
 {
     const std::string INP_FILE_NAME = "../../data/problem1_titanic/titanic.csv";
     std::ifstream inputFile;
     inputFile.open(INP_FILE_NAME);
-//    VecString surnames = getSurvivorSurnames(inputFile);
+    VecString surnames = getSurvivorSurnames(inputFile);
     inputFile.close();
     
     // other functions here
