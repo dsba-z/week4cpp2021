@@ -14,5 +14,4 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -Werror=return-type")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
 
 #### the list of targets ####
-add_executable(problem1_files   problem1_files/main.cpp)                 # read and write text files
-add_executable(problem2_titanic problem2_titanic/main.cpp)               # names 2
+add_executable(problem1_titanic problem1_titanic/main.cpp)               # names 2
