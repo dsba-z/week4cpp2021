@@ -141,24 +141,7 @@ VecString getSurvivorSurnames(std::istream& in)
     return vecString;
 }
 
-void printVec(const VecString& vecString)
-{
-    for (size_t i = 0; i < vecString.size(); ++i)
-    {
-        std::cout << i+1 << ") " << vecString[i] << "\n";
-    }
-}
 
-void printVecIter(const VecString::const_iterator& vStart, const VecString::const_iterator& vEnd)
-{
-    size_t counter = 1;
-    for (VecString::const_iterator it = vStart; it != vEnd; ++it)
-    {
-        std::cout << counter << ") " << *it << "\n";
-        
-        ++counter;
-    }
-}
 
 
 int main ()
@@ -169,7 +152,4 @@ int main ()
     VecString surnames = getSurvivorSurnames(inputFile);
     inputFile.close();
     
-    std::sort(surnames.begin(), surnames.end());
-    std::reverse(surnames.begin(), surnames.end());
-    printVecIter(surnames.cbegin(), surnames.cend());
 }
