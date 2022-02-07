@@ -1,4 +1,4 @@
-# DSBA Introduction to Programming // Workshops 8
+# DSBA Introduction to Programming // Workshops 8, 9
 Spring semester 2021/22
 
 Dealing with files, streams, vectors and iterators.
