@@ -90,6 +90,7 @@
 #include <algorithm>
 
 typedef std::vector<std::string> VecString;
+typedef std::vector<std::string>::iterator VecStringIter;
 
 
 bool extractDataFromLine(std::istream& in, bool& survived, std::string& surname)
@@ -122,13 +123,6 @@ bool extractDataFromLine(std::istream& in, bool& survived, std::string& surname)
     return true;
 }
 
-void printVec(const VecString& v)
-{
-    for (size_t i = 0; i < v.size(); ++i)
-    {
-        std::cout << i+1 << ") " << v[i] << std::endl;
-    }
-}
 
 VecString getSurvivorSurnames(std::istream& in)
 {
@@ -148,6 +142,27 @@ VecString getSurvivorSurnames(std::istream& in)
 }
 
 
+void printVec(const VecString& v)
+{
+    for (size_t i = 0; i < v.size(); ++i)
+    {
+        std::cout << i+1 << ") " << v[i] << std::endl;
+    }
+}
+
+void printVecIter(const VecString::reverse_iterator& vBegin, const VecString::reverse_iterator& vEnd)
+{
+    int counter = 1;
+    for (VecString::reverse_iterator it = vBegin; it != vEnd; ++it)
+    {
+        std::cout << counter << ") " << *it << std::endl;
+        ++counter;
+    }
+}
+/// PRACTICE
+/// 7) Change (or implement, if you haven't) the function from task 4.2 to follow the
+/// same logic as the function printVecIter from task 6. Use iterators to compute the
+/// mean value of a vector.
 int main ()
 {
     const std::string INP_FILE_NAME = "../../data/problem1_titanic/titanic.csv";
@@ -156,9 +171,19 @@ int main ()
     VecString surnames = getSurvivorSurnames(inputFile);
     inputFile.close();
     
-    std::sort(surnames.begin(), surnames.end());
-    std::reverse(surnames.begin(), surnames.end());
+    std::string a = "123";
+//    a.begin(), a.end();
+    // surnames.begin() = 5;
     
-    printVec(surnames);
+//    VecString::const_iterator it1 = surnames.cbegin();
+//    std::sort(it1, surnames.end());
+//    std::reverse(surnames.begin(), surnames.end());
+    
+//    it - v.begin();
+//    printVec(surnames);
+//    printVec(surnames);
+
+//    printVecIter(it1, surnames.cend());
+    printVecIter(surnames.rbegin(), surnames.rend());
     return 0;
 }
