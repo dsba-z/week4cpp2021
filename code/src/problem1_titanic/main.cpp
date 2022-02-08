@@ -112,14 +112,14 @@ bool extractDataFromLine(std::istream& in, bool& survived, std::string& surname)
     // Survived
     std::getline(sstr, buffer, ',');
     survived = std::stoi(buffer);
-    
+    // stod
     
     // Pclass
     std::getline(sstr, buffer, ',');
-//    sstr.ignore(10000, ',');
+
     
     // Surname
-    std::getline(sstr, buffer, ';');
+    std::getline(sstr, buffer, ',');
     surname = buffer;
     
     return true;
@@ -127,17 +127,16 @@ bool extractDataFromLine(std::istream& in, bool& survived, std::string& surname)
 }
 
 
-VecString getSurvivorSurnames(std::istream& in)
+VecString getSurvivorSurnames(std::istream& in, bool survivedQuery)
 {
     in.ignore(10000, '\n');
-//    std::string header;
-//    std::getline(in, header);
+
     bool survived;
     std::string surname;
     VecString surnames;
     while (extractDataFromLine(in, survived, surname))
     {
-        if (survived)
+        if (survived == survivedQuery)
         {
             surnames.push_back(surname);
         }
@@ -145,13 +144,35 @@ VecString getSurvivorSurnames(std::istream& in)
     return surnames;
 }
 
+
+
+void printVec(const VecString& surnames)
+{
+    for (unsigned int i = 0; i < surnames.size(); ++i)
+    {
+        std::cout << i+1 << ") " << surnames[i] << std::endl;
+    }
+}
+
+
 int main()
 {
     const std::string INP_FILE_NAME = "../../data/problem1_titanic/titanic.csv";
     std::ifstream inputFile;
     inputFile.open(INP_FILE_NAME);
-    VecString surnames = getSurvivorSurnames(inputFile);
+    VecString surnames = getSurvivorSurnames(inputFile, true);
     inputFile.close();
+    
+    
+    printVec(surnames);
+//    printVec(surnames);
+    
+//    surnames[2];
+    
+//    for (unsigned int i = 0; i < surnames.size(); ++i)
+//    {
+//        std::cout << i+1 << ") " << surnames[i] << std::endl;
+//    }
     
     // other functions here
 }
