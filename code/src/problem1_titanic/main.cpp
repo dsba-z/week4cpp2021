@@ -90,6 +90,80 @@
 #include <random>
 #include <algorithm>
 
+typedef std::vector<std::string> VecString;
+
+bool extractDataFromLine(std::istream& in, bool& survived, std::string& surname)
+{
+    std::string line;
+
+    if (not std::getline(in, line))
+    {
+        // reading failed
+        return false;
+    }
+    // reading succeeded
+    
+    std::stringstream sstr(line);
+    
+    std::string buffer;
+    
+    // Passenger ID
+    std::getline(sstr, buffer, ',');
+    
+    // Survived
+    std::getline(sstr, buffer, ',');
+    survived = std::stoi(buffer);
+    
+    // Pclass
+    std::getline(sstr, buffer, ',');
+    
+    // Name
+    std::getline(sstr, buffer, ';');
+    surname = buffer;
+    
+    return true;
+}
+
+VecString getSurvivorSurnames(std::istream& in)
+{
+//    std::string header;
+//    std::getline(in, header);
+    in.ignore(10000, '\n');
+    
+    bool survived;
+    std::string surname;
+    VecString surnames;
+    while (extractDataFromLine(in, survived, surname))
+    {
+        if (survived)
+        {
+            surnames.push_back(surname);
+        }
+    }
+    return surnames;
+}
+
+
+void printVecIter(VecString::const_iterator vStart, VecString::const_iterator vEnd)
+{
+    int counter = 1;
+    for (auto it = vStart; it!=vEnd; ++it)
+    {
+        std::cout << counter << ") " << *it << std::endl;
+        ++counter;
+    }
+}
+
+
+//void addOne(int& value)
+//{
+//    value = value + 1;
+//}
+
+//a = 1;
+//addOne(a);
+//cout << a;
+//> 2
 
 
 int main()
@@ -97,8 +171,8 @@ int main()
     const std::string INP_FILE_NAME = "../../data/problem1_titanic/titanic.csv";
     std::ifstream inputFile;
     inputFile.open(INP_FILE_NAME);
-//    VecString surnames = getSurvivorSurnames(inputFile);
+    VecString surnames = getSurvivorSurnames(inputFile);
     inputFile.close();
-    
+    printVecIter(surnames.begin(), surnames.end());
     // other functions here
 }
