@@ -91,6 +91,7 @@
 #include <algorithm>
 
 typedef std::vector<std::string> VecString;
+typedef std::vector<double> VecDouble;
 
 bool extractDataFromLine(std::istream& in, bool& survived, std::string& surname)
 {
@@ -143,36 +144,46 @@ VecString getSurvivorSurnames(std::istream& in)
     return surnames;
 }
 
+void printVec(const VecString& vec)
+{
+    for (unsigned int i = 0; i < vec.size(); ++i)
+    {
+        std::cout << i + 1 << ") " << vec[i] << std::endl;
+//        vec[i] = "1241251";
+    }
+}
+/// PRACTICE
+/// 7) Change (or implement, if you haven't) the function from task 4.2 to follow the
+/// same logic as the function printVecIter from task 6. Use iterators to compute the
+/// mean value of a vector.
 
-void printVecIter(VecString::const_iterator vStart, VecString::const_iterator vEnd)
+void printVecIter(const VecString::const_iterator& vStart, const VecString::const_iterator& vEnd)
 {
     int counter = 1;
-    for (auto it = vStart; it!=vEnd; ++it)
+    for (VecString::const_iterator it = vStart; it != vEnd; ++it)
     {
         std::cout << counter << ") " << *it << std::endl;
         ++counter;
     }
 }
 
-
-//void addOne(int& value)
-//{
-//    value = value + 1;
-//}
-
-//a = 1;
-//addOne(a);
-//cout << a;
-//> 2
-
-
 int main()
 {
+    int a;
     const std::string INP_FILE_NAME = "../../data/problem1_titanic/titanic.csv";
     std::ifstream inputFile;
     inputFile.open(INP_FILE_NAME);
     VecString surnames = getSurvivorSurnames(inputFile);
     inputFile.close();
+    
     printVecIter(surnames.begin(), surnames.end());
-    // other functions here
+    printVecIter(surnames.begin(), surnames.end());
+//    std::sort(surnames.begin(), surnames.end());
+    
+    for (const std::string& name : surnames)
+    {
+        std::cout << ") " << name << std::endl;
+    }
+    
+    
 }
