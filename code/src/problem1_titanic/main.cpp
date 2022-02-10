@@ -167,9 +167,23 @@ void printVecIter(const VecString::const_iterator& vStart, const VecString::cons
     }
 }
 
+double getAverage(const std::vector<double>& v)
+{
+    double total = 0;
+    for (size_t i = 0; i < v.size(); ++i)
+    {
+        total += v[i];
+    }
+    return total / v.size();
+}
+
+//... getAverageIter(.....)
+//{
+//    ....
+//}
+
 int main()
 {
-    int a;
     const std::string INP_FILE_NAME = "../../data/problem1_titanic/titanic.csv";
     std::ifstream inputFile;
     inputFile.open(INP_FILE_NAME);
@@ -180,10 +194,11 @@ int main()
     printVecIter(surnames.begin(), surnames.end());
 //    std::sort(surnames.begin(), surnames.end());
     
-    for (const std::string& name : surnames)
-    {
-        std::cout << ") " << name << std::endl;
-    }
+    std::vector<double> numbers = {1, 5, 10.9, 1000};
+    double mean = getAverage(numbers);
+    std::cout << mean << std::endl;
+//    double meanIter = getAverageIter(numbers);
+//    std::cout << meanIter << std::endl;
     
     
 }
