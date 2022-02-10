@@ -163,7 +163,7 @@ void printVec(const VecString& surnames)
     }
 }
 
-void printVecIter(const VecString::iterator& vBegin, const VecString::iterator& vEnd)
+void printVecIter(const std::vector<std::string>::iterator& vBegin, const VecString::iterator& vEnd)
 {
     int counter = 1;
     for (VecString::iterator it = vBegin; it != vEnd; ++it)
@@ -202,14 +202,36 @@ int main()
     std::vector<double> numbers = {1, 205.5, 36, 67};
     double mean = getAverage(numbers);
     std::cout << mean << std::endl;
-    double meanIter = getAverageIter(numbers.begin(), number.end());
+//    double meanIter = getAverageIter(numbers.begin(), numbers.end());
             
             
 //    printVecIter(surnames.begin(), surnames.end());
-    std::reverse(surnames.begin(), surnames.end());
+//    std::reverse(surnames.begin(), surnames.end());
 //    printVec(surnames);
     std::sort(surnames.begin(), surnames.end());
 //    printVec(surnames);
+    
+    VecString::iterator itMellors = std::find(surnames.begin(), surnames.end(), "Mellors");
+    
+//    std::cout << *itMellors << std::endl;
+//    ++itMellors;
+//    std::cout << *itMellors << std::endl;
+//    ++itMellors;
+//    std::cout << *itMellors << std::endl;
 
+    
+    
+    VecString::iterator itYoung = std::find(surnames.begin(), surnames.end(), "Young");
+    
+    
+    //    std::cout << *itMellors << std::endl;
+    VecString savedNames;
+    
+    savedNames.resize(1000);
+    
+    
+    std::copy(itMellors, itYoung + 1, savedNames.begin());
+    
+    printVec(savedNames);
     
 }
