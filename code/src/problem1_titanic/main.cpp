@@ -176,14 +176,31 @@ int main ()
     // surnames.begin() = 5;
     
 //    VecString::const_iterator it1 = surnames.cbegin();
-//    std::sort(it1, surnames.end());
+    std::sort(surnames.begin(), surnames.end());
 //    std::reverse(surnames.begin(), surnames.end());
     
 //    it - v.begin();
 //    printVec(surnames);
 //    printVec(surnames);
+    
+    VecString::iterator itMell = std::find(surnames.begin(), surnames.end(), "Mellors");
+    
+    std::cout << *itMell << std::endl;
+    std::cout << *(itMell+1) << std::endl;
+    itMell++;
+    itMell++;
+    std::cout << *itMell << std::endl;
+    
+    VecString::iterator itYoung = itMell + 10; // 10 is chosen arbitrarily
+
+    VecString v2;
+    v2.resize(itYoung - itMell + 1);
+    
+    std::copy(itMell, itYoung + 1, v2.begin());
+    
+    printVec(v2);
 
 //    printVecIter(it1, surnames.cend());
-    printVecIter(surnames.rbegin(), surnames.rend());
+//    printVecIter(surnames.rbegin(), surnames.rend());
     return 0;
 }
