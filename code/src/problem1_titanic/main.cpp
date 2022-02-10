@@ -90,6 +90,9 @@
 #include <random>
 #include <algorithm>
 
+using std::cout;
+using std::cin;
+
 typedef std::vector<std::string> VecString;
 typedef std::vector<double> VecDouble;
 
@@ -119,7 +122,7 @@ bool extractDataFromLine(std::istream& in, bool& survived, std::string& surname)
 
     
     // Surname
-    std::getline(sstr, buffer, ',');
+    std::getline(sstr, buffer, ';');
     surname = buffer;
     
     return true;
@@ -146,6 +149,12 @@ VecString getSurvivorSurnames(std::istream& in, bool survivedQuery)
 
 
 
+
+/// PRACTICE
+/// 7) Change (or implement, if you haven't) the function from task 4.2 to follow the
+/// same logic as the function printVecIter from task 6. Use iterators to compute the
+/// mean value of a vector.
+
 void printVec(const VecString& surnames)
 {
     for (unsigned int i = 0; i < surnames.size(); ++i)
@@ -153,6 +162,32 @@ void printVec(const VecString& surnames)
         std::cout << i+1 << ") " << surnames[i] << std::endl;
     }
 }
+
+void printVecIter(const VecString::iterator& vBegin, const VecString::iterator& vEnd)
+{
+    int counter = 1;
+    for (VecString::iterator it = vBegin; it != vEnd; ++it)
+    {
+        std::cout << counter << ") " << *it << std::endl;
+        ++counter;
+    }
+}
+
+double getAverage(const std::vector<double>& v)
+{
+    double total = 0;
+    for (unsigned int i = 0; i < v.size(); ++i)
+    {
+        total += v[i];
+    }
+    return total / v.size();
+}
+
+
+//... getAverageIter(.......)
+//{
+    
+//}
 
 
 int main()
@@ -164,15 +199,17 @@ int main()
     inputFile.close();
     
     
-    printVec(surnames);
+    std::vector<double> numbers = {1, 205.5, 36, 67};
+    double mean = getAverage(numbers);
+    std::cout << mean << std::endl;
+    double meanIter = getAverageIter(numbers.begin(), number.end());
+            
+            
+//    printVecIter(surnames.begin(), surnames.end());
+    std::reverse(surnames.begin(), surnames.end());
 //    printVec(surnames);
+    std::sort(surnames.begin(), surnames.end());
+//    printVec(surnames);
+
     
-//    surnames[2];
-    
-//    for (unsigned int i = 0; i < surnames.size(); ++i)
-//    {
-//        std::cout << i+1 << ") " << surnames[i] << std::endl;
-//    }
-    
-    // other functions here
 }
