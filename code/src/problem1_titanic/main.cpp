@@ -190,15 +190,16 @@ int main()
     VecString surnames = getSurvivorSurnames(inputFile);
     inputFile.close();
     
-    printVecIter(surnames.begin(), surnames.end());
-    printVecIter(surnames.begin(), surnames.end());
-//    std::sort(surnames.begin(), surnames.end());
+//    printVecIter(ssurnames.begin(), surnames.end());
+//    printVecIter(surnames.begin(), surnames.end());
     
     std::vector<double> numbers = {1, 5, 10.9, 1000};
     double mean = getAverage(numbers);
     std::cout << mean << std::endl;
 //    double meanIter = getAverageIter(numbers);
 //    std::cout << meanIter << std::endl;
+    std::sort(surnames.begin(), surnames.end());
+    VecString::iterator itMellors = std::find(surnames.begin(), surnames.end(), "Mellors");
     
     
 }
